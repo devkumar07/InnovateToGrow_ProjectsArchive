@@ -16,7 +16,6 @@
     .dropdown-check-list .anchor {
     width: 98%;
     position: relative;
-    cursor: pointer;
     display: inline-block;
     padding-top:5px;
     padding-left:5px;
@@ -139,6 +138,27 @@ $(document).ready(function(){
 });
 </script>
 <script>
+var test;
+$("#list3").ready(function(){
+      $('input[type="checkbox"]').click(function(){
+          if($(this).is(":checked")){
+            test = "Bart";
+          }
+          else if($(this).is(":not(:checked)")){
+              alert("Checkbox is unchecked.");
+          }
+      });
+  });
+  $("#list4").ready(function(){
+        $('input[type="checkbox"]').click(function(){
+            if($(this).is(":checked")){
+
+            }
+            else if($(this).is(":not(:checked)")){
+                alert("Checkbox is unchecked.");
+            }
+        });
+    });
 	function filterTable(event) {
 		var filter = event.target.value.toUpperCase();
 		var rows = document.querySelector("#myTable tbody").rows;
