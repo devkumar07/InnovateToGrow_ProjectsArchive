@@ -4,6 +4,13 @@
   <title>Testing the Parse</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript">
+  $(document).ready( function () {
+    $('#table_id').dataTable();
+  });
+  </script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
  </head>
  <style>
     .dropdown-check-list{
@@ -92,7 +99,6 @@ jQuery(function ($) {
         var checkList = $('.dropdown-check-list');
         checkList.on('click', 'span.anchor', function(event){
             var element = $(this).parent();
-
             if ( element.hasClass('visible') )
             {
                 element.removeClass('visible');
@@ -107,7 +113,7 @@ jQuery(function ($) {
 <script>
 $(document).ready(function(){
   $.ajax({
-   url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vQweMTwuhHdnDY-SIs2renw34xUzDoUr8wh2ZFWEtVsIJ5X4IK--hk6CYzdiaLwSIncO_MiCLElRmiv/pub?gid=1730740140&single=true&output=tsv",
+   url:"https://docs.google.com/spreadsheets/d/e/2PACX-1vQweMTwuhHdnDY-SIs2renw34xUzDoUr8wh2ZFWEtVsIJ5X4IK--hk6CYzdiaLwSIncO_MiCLElRmiv/pub?output=tsv",
    dataType:"text",
    success:function(data)
    {
@@ -134,7 +140,6 @@ $(document).ready(function(){
     $('#log_table').html(table_data);
    }
   });
-
 });
 </script>
 <script>
@@ -152,7 +157,6 @@ $("#list3").ready(function(){
   $("#list4").ready(function(){
         $('input[type="checkbox"]').click(function(){
             if($(this).is(":checked")){
-
             }
             else if($(this).is(":not(:checked)")){
                 alert("Checkbox is unchecked.");
@@ -162,7 +166,6 @@ $("#list3").ready(function(){
 	function filterTable(event) {
 		var filter = event.target.value.toUpperCase();
 		var rows = document.querySelector("#myTable tbody").rows;
-
 		for (var i = 1; i < rows.length; i++) {
 			var firstCol = rows[i].cells[0].textContent.toUpperCase();
 			var secondCol = rows[i].cells[1].textContent.toUpperCase();
@@ -176,6 +179,5 @@ $("#list3").ready(function(){
 			}
 		}
 	}
-
 	document.querySelector('#myInput').addEventListener('keyup', filterTable, false);
 </script>
