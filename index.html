@@ -11,13 +11,11 @@
         "bServerSide":false,
         "bProcessing":true,
         "sAjaxDataProp": "feed.entry",
-        "sAjaxSource": "https://spreadsheets.google.com/feeds/list/1CqtlaOq7Fs0Xu3zacwGG-GbDFcfe7difM-38e06C988/1/public/values?alt=json",
+        "sAjaxSource": "https://spreadsheets.google.com/feeds/list/1zUUKUtQjACW9jopRg9dqHnqprMz67CUXhWWNhir92-g/1/public/values?alt=json",
         "aoColumns": [
-        { "mDataProp": "gsx$team.$t" },
-        { "mDataProp": "gsx$year.$t" },
-        { "mDataProp": "gsx$project.$t" },
-        { "mDataProp": "gsx$client.$t" },
-        { "mDataProp": "gsx$link.$t" },
+        { "mDataProp": "gsx$year-semester-pro.$t"},
+        { "mDataProp": "gsx$projecttitle.$t"},
+        { "mDataProp": "gsx$organizationname.$t"},
         ]
       });
     });
@@ -28,11 +26,9 @@
     <table id="example">
       <thead>
         <tr>
-          <th>Team #</th>
           <th>Year-Semester</th>
           <th>Project Name</th>
-          <th>Client- Organization</th>
-          <th>Project summary</th>
+          <th>Organization</th>
         </tr>
       </thead>
     </table>
