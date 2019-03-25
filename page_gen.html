@@ -41,7 +41,7 @@
           var objectives = ''
 
           for (var cell_count = 0; cell_count < cell_data.length; cell_count++) {
-            //check status?
+            //check status
             if (count === 0) {
               break
             }
@@ -62,24 +62,23 @@
             }
           }
 
-          if (title != '') {
+          if(title != ''){
             test_data += '<h1 style="text-align:center">' + title + '</h1>'
           }
-          if (organization != '') {
+          if(organization != ''){
             test_data += '<h2 style="text-align:center">' + organization + '</h2>'
           }
-          if (background != '') {
+          if(background != ''){
             test_data += '<h2 style="text-align:center"> Background </h2> <p>' + background + '</p>'
           }
-          if (problem != '') {
+          if (problem != ''){
             test_data += '<h2 style="text-align:center"> Problem </h2> <p>' + problem + '</p>'
           }
-          if (objectives != '') {
+          if (objectives != ''){
             test_data += '<h2 style="text-align:center"> Objectives </h2> <p>' + objectives + '</p>'
           }
 
         }
-        output_data += '</table>';
         $('#log').html(test_data);
       }
     });
