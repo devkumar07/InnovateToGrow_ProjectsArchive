@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Testing the Parse</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="table-responsive">
+      <h1 align="center">Testing In progress</h1>
+      <br />
+      <div align="center">
+      </div>
+      <br />
+      <div id="log">
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
+
+<script>
+  $(document).ready(function() {
+    $.ajax({
+      url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vShGs6XxPGFe_U11KpWRtsSMPbw6itpSZvJV_19GywwdRQtKUieE--q2TGfNSA1wW_kdthnymHAS4LT/pub?output=tsv",
+      dataType: "text",
+      success: function(data) {
+        var log_data = data.split(/\r?\n|\r/);
+        var test_data = '<p>'
+        for (var count = 0; count < log_data.length; count++) {
+
+          var cell_data = log_data[count].split("	");
+          var title = ''
+          var organization = ''
+          var background = ''
+          var problem = ''
+          var objectives = ''
+
+          for (var cell_count = 0; cell_count < cell_data.length; cell_count++) {
+            //check status
+            if (count === 0) {
+              break
+            }
+            if (cell_count === 10) {
+              organization = cell_data[cell_count]
+            }
+            if (cell_count === 15) {
+              title = cell_data[cell_count]
+            }
+            if (cell_count === 16) {
+              background = cell_data[cell_count]
+            }
+            if (cell_count === 17) {
+              problem = cell_data[cell_count]
+            }
+            if (cell_count === 18) {
+              objectives = cell_data[cell_count]
+            }
+          }
+
+          if(title != ''){
+            test_data += '<h1 style="text-align:center">' + title + '</h1>'
+          }
+          if(organization != ''){
+            test_data += '<h2 style="text-align:center">' + organization + '</h2>'
+          }
+          if(background != ''){
+            test_data += '<h2 style="text-align:center"> Background </h2> <p>' + background + '</p>'
+          }
+          if (problem != ''){
+            test_data += '<h2 style="text-align:center"> Problem </h2> <p>' + problem + '</p>'
+          }
+          if (objectives != ''){
+            test_data += '<h2 style="text-align:center"> Objectives </h2> <p>' + objectives + '</p>'
+          }
+
+        }
+        $('#log').html(test_data);
+      }
+    });
+  });
+</script>
