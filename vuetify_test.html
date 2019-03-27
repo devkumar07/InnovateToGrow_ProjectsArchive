@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex,nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div id="app">
+            <v-app>
+                <v-container fluid>
+                        <v-card>
+                            <v-card-title>
+                                Project Catalog
+                                <v-spacer></v-spacer>
+                                <v-text-field
+                                    v-model="search"
+                                    append-icon="search"
+                                    label="Search"
+                                    single-line
+                                    hide-details
+                                ></v-text-field>
+                            </v-card-title>
+                            <v-data-table :headers="headers" :items="rows" :search="search" :expand="expand" item-key="index" disable-initial-sort class="elevation-1">
+                                <template v-slot:items="props">
+                                    <tr @click="props.expanded = !props.expanded">
+                                        <td>{{ props.item['Year-Semester-PRO'] }}</td>
+                                        <td>{{ props.item['Organization Name'] }}</td>
+                                        <td>{{ props.item['Project Title'] }}</td>
+                                    </tr>
+                                </template>
+                                <template v-slot:expand="props">
+                                    <v-card flat>
+                                        <v-card-text>{{ props.item['Background'] }}</v-card-text>
+                                    </v-card>
+                                </template>                                
+                            </v-data-table>
+                        </v-card>
+                </v-container>
+            </v-app>
+        </div>
+
+        <script>
+            var data = {
+                expand: true,
+                search: '',
+                headers: [{
+                    text: 'Year Semester',
+                    value: 'Year-Semester-PRO'
+                }, {
+                    text: 'Organization',
+                    value: 'Organization Name'
+                }, {
+                    text: 'Title',
+                    value: 'Project Title'
+                }],
+                rows: []
+            };
+
+            const vm = new Vue({
+                el: '#app',
+                data: data,
+                methods: {
+                    getData() {
+                        axios.get(
+                                `https://docs.google.com/spreadsheets/d/e/2PACX-1vShGs6XxPGFe_U11KpWRtsSMPbw6itpSZvJV_19GywwdRQtKUieE--q2TGfNSA1wW_kdthnymHAS4LT/pub?output=tsv`
+                            )
+                            .then((resp) => {
+                                this.rows = this.tsvToJson(resp.data);
+                                console.log(this.rows);
+                            });
+                    },
+                    tsvToJson(csv) {
+                        const lines = csv.split('\n');
+                        const result = [];
+                        const headers = lines[0].split('\t');
+
+                        lines.map(function (line, indexLine) {
+                            if (indexLine < 1) return;
+
+                            const obj = {};
+                            const currentline = line.split("\t");
+
+                            headers.map(function (header, indexHeader) {
+                                obj[header] = currentline[indexHeader];
+                            })
+                            obj.index = indexLine;
+
+                            result.push(obj);
+                        })
+                        result.pop();
+                        return result;
+                    }
+                },
+                mounted() {
+                    this.getData();
+                }
+            })
+        </script>
+
+    </div>
+</body>
+
+</html>
