@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript">
+    function format(d) {
+      // `d` is the original data object for the row
+   return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+       '<tr>'+
+           '<td>Background:</td>'+
+           '<td>'+d.Background+'</td>'+
+       '</tr>'+
+   '</table>';
+    }
+    $(document).ready(function() {
+      var table=$('#example').DataTable({
+        "ajax": "data.json",
+        "columns": [
+          {
+                "className":      'details-control',
+                "orderable":      false,
+                "data":           "Buttons",
+                "defaultContent": ''
+            },
+          { "data": "Year-Semester-PRO" },
+          { "data": "Project Title" },
+          { "data": "Organization Name" }
+        ],
+        "order": [[1, 'asc']]
+      });
+      $('#example tbody').on('click', 'td.details-control', function() {
+        var tr = $(this).closest('tr');
+          var row = table.row(tr);
+          if ( row.child.isShown() ) {
+              // This row is already open - close it
+              row.child.hide();
+              tr.removeClass('shown');
+          }
+          else {
+              // Open this row
+              row.child( format(row.data()) ).show();
+              tr.addClass('shown');
+          }
+      });
+    });
+  </script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+</head>
+
+<body>
+  <table id="example" class="display" style="width:100%">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Year-Semester</th>
+        <th>Project Name</th>
+        <th>Organization</th>
+      </tr>
+    </thead>
+  </table>
+</body>
+
+</html>
