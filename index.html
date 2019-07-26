@@ -22,7 +22,7 @@
         "bServerSide": false,
         "bProcessing": true,
         "sAjaxDataProp": "feed.entry",
-        "sAjaxSource": "https://spreadsheets.google.com/feeds/list/1zUUKUtQjACW9jopRg9dqHnqprMz67CUXhWWNhir92-g/1/public/values?alt=json",
+        "sAjaxSource": "https://spreadsheets.google.com/feeds/list/1b_4EDyDdz10RkZccWe7e-eVzZsPWYCchRgflhPN1Q3g/1/public/values?alt=json",
       "aoColumns": [{
             "className": 'details-control',
             "orderable": false,
@@ -31,6 +31,9 @@
           },
           {
             "mDataProp": "gsx$year-semester-pro.$t"
+          },
+          {
+            "mDataProp": "gsx$categoryindustry.$t"
           },
           {
             "mDataProp": "gsx$projecttitle.$t"
@@ -65,8 +68,9 @@
   <table id="example" class="display" style="width:100%">
     <thead>
       <tr>
-        <th></th>
+        <th>Details</th>
         <th>Year-Semester</th>
+        <th>Category</th>
         <th>Project Name</th>
         <th>Organization</th>
       </tr>
