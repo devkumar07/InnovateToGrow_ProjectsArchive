@@ -1,19 +1,21 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-
-<head>
-  <meta charset="utf-8">
-  <title></title>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-  <script type="text/javascript">
+<meta charset="utf-8">
+<title></title>
+<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+<style type="text/css">td.details-control {
+      background: url('../resources/details_open.png') no-repeat center center;
+      cursor: pointer;
+    }
+    tr.shown td.details-control {
+        background: url('../resources/details_close.png') no-repeat center center;
+    }
+</style>
+<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" /><script src="https://code.jquery.com/jquery-3.3.1.js"></script><script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script><script type="text/javascript">
     function format(d) {
       // `d` is the original data object for the row
       return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
         '<tr>' +
-        '<td>Background:</td>' +
-        '<td>' + d.gsx$background.$t + '</td>' +
+        '<td>Short Summary:</td>' +
+        '<td>' + d.gsx$shortsummaryfinaltext.$t + '</td>' +
         '</tr>' +
         '</table>';
     }
@@ -44,7 +46,11 @@
         ],
         "order": [
           [1, 'desc']
-        ]
+        ],
+        fixedHeader: {
+          header: true,
+          footer: true
+        }
       });
       $('#example tbody').on('click', 'td.details-control', function() {
         var tr = $(this).closest('tr');
@@ -61,21 +67,23 @@
       });
     });
   </script>
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
-</head>
-
-<body>
-  <table id="example" class="display" style="width:100%">
-    <thead>
-      <tr>
-        <th>Details</th>
-        <th>Year-Semester</th>
-        <th>Category</th>
-        <th>Project Name</th>
-        <th>Organization</th>
-      </tr>
-    </thead>
-  </table>
-</body>
-
-</html>
+<table class="display" id="example" style="width:100%">
+	<thead>
+		<tr>
+			<th>Details</th>
+			<th>Year-Semester</th>
+			<th>Category</th>
+			<th>Project Name</th>
+			<th>Organization</th>
+		</tr>
+	</thead>
+	<tfoot>
+		<tr>
+			<th>Details</th>
+			<th>Year-Semester</th>
+			<th>Category</th>
+			<th>Project Name</th>
+			<th>Organization</th>
+		</tr>
+	</tfoot>
+</table>
